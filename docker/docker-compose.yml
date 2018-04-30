@@ -1,6 +1,9 @@
 version: '2'
 services:
-  questFactoryBlazegraph:
-    image: questfactoryblazegraph
+  questFactoryNeo4j:
+    image: neo4j:3.3
     ports:
-      - "9999:9999"
+      - "7474:7474"
+      - "7687:7687"
+    environment:
+      - "NEO4J_AUTH=none"

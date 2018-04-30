@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Compounds</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.12.4.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#table').DataTable();
+        });
+    </script>
+</head>
+
+<body>
+
+<!--<div th:replace="fragments/header :: header" />-->
+
+<div class="content">
+    <table class="table table-striped table-bordered" cellspacing="0" width="100%" id="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Quest name</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="quest : ${quests}">
+            <td th:text="${quest.id}">1</td>
+            <td th:text="${quest.name}">1</td>
+            <td th:text="${quest.description}">1</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+
+</html>
