@@ -1,6 +1,6 @@
 version: '2'
 services:
-  blazegraph:
-    image: lyrasis/blazegraph:2.1.4
+  questFactoryBlazegraph:
+    image: questfactoryblazegraph
     ports:
-      - "8181:8080"
+      - "9999:9999"

@@ -23,7 +23,7 @@ targetCompatibility = 1.8
 repositories {
 	mavenLocal()
 	mavenCentral()
-	maven{url: "http://www.systap.com/maven/releases"}
+	maven{url "http://www.systap.com/maven/releases"}
 }
 
 
@@ -34,12 +34,12 @@ dependencies {
 	compile(group: 'com.blazegraph', name: 'bigdata-core', version: '2.1.4') {
                 exclude group: 'org.slf4j', module: 'slf4j-log4j12' //by both name and group
             }
-    compile group: 'org.openrdf.sesame', name: 'sesame-queryparser-sparql', version: '4.1.2'
-	compile group: 'org.openrdf.sesame', name: 'sesame-model', version: '4.1.2'
-	compile group: 'org.openrdf.sesame', name: 'sesame-sail-memory', version: '4.1.2'
-	compile group: 'org.openrdf.sesame', name: 'sesame-sail-nativerdf', version: '4.1.2'
-	compile group: 'org.openrdf.sesame', name: 'sesame-repository-sail', version: '4.1.2'
-	compile group: 'org.openrdf.sesame', name: 'sesame-rio-turtle', version: '4.1.2'
+    compile group: 'org.openrdf.sesame', name: 'sesame-queryparser-sparql', version: '2.7.12'
+	compile group: 'org.openrdf.sesame', name: 'sesame-model', version: '2.7.12'
+	compile group: 'org.openrdf.sesame', name: 'sesame-sail-memory', version: '2.7.12'
+	compile group: 'org.openrdf.sesame', name: 'sesame-sail-nativerdf', version: '2.7.12'
+	compile group: 'org.openrdf.sesame', name: 'sesame-repository-sail', version: '2.7.12'
+	compile group: 'org.openrdf.sesame', name: 'sesame-rio-turtle', version: '2.7.12'
 	runtime('org.springframework.boot:spring-boot-devtools')
 	runtime('com.h2database:h2')
 	runtime('mysql:mysql-connector-java')
