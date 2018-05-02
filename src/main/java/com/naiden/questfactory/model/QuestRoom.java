@@ -7,10 +7,11 @@ import org.neo4j.ogm.annotation.Relationship;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.Size;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @NodeEntity
-public class Quest {
+public class QuestRoom {
     @Id
     @GeneratedValue
     private Long id;
@@ -22,34 +23,46 @@ public class Quest {
     @Property
     private String description;
 
-    @Relationship(type = "hasEntryPoint")
-    private QuestRoom entryPoint;
+    @Relationship(type = "hasChild")
+    private Set<QuestRoom> children;
 
-    public Quest() {
+    public QuestRoom() {
     }
 
-    public Quest(String name, String description, String entryPointName) {
+    public QuestRoom(String name, String description, String entryPointName) {
         this.name = name;
         this.description = description;
-        this.entryPoint = new QuestRoom(entryPointName);
+        addChild(new QuestRoom(entryPointName));
     }
 
-    public Quest(String entryPointName) {
-        this.name = entryPointName;
+    public QuestRoom(String name) {
+        this.name = name;
     }
 
+    public QuestRoom(String name, String description, Set<QuestRoom> children) {
+        this.name = name;
+        this.description = description;
+        this.children = children;
+    }
 
-    public Quest(long id, String name, String description) {
+    public void addChild(QuestRoom child) {
+        if (children == null) {
+            children = new HashSet<>();
+        }
+        children.add(child);
+    }
+
+    public QuestRoom(long id, String name, String description) {
         this.id = id;
         this.name = name;
         this.description = description;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -69,19 +82,19 @@ public class Quest {
         this.description = description;
     }
 
-    public QuestRoom getEntryPoint() {
-        return entryPoint;
+    public Set<QuestRoom> getChildren() {
+        return children;
     }
 
-    public void setEntryPoint(QuestRoom entryPoint) {
-        this.entryPoint = entryPoint;
+    public void setChildren(Set<QuestRoom> children) {
+        this.children = children;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Quest quest = (Quest) o;
+        QuestRoom quest = (QuestRoom) o;
         return Objects.equals(name, quest.name);
     }
 
@@ -92,7 +105,10 @@ public class Quest {
 
 
     public String toString() {
-        return this.name + "'s entry point: " + entryPoint.getName();
+        return this.name + "'s children => "
+                + Optional.ofNullable(this.children).orElse(
+                Collections.emptySet()).stream()
+                .map(QuestRoom::getName)
+                .collect(Collectors.toList());
     }
-
 }

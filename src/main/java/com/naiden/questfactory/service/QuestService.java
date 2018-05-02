@@ -2,6 +2,7 @@ package com.naiden.questfactory.service;
 
 import com.naiden.questfactory.model.Quest;
 import com.naiden.questfactory.repository.QuestRepository;
+import com.naiden.questfactory.repository.QuestRoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +12,12 @@ import java.util.List;
 public class QuestService {
 
     private final QuestRepository questRepository;
+    private final QuestRoomRepository questRoomRepository;
 
     @Autowired
-    public QuestService(QuestRepository questRepository) {
+    public QuestService(QuestRepository questRepository, QuestRoomRepository questRoomRepository) {
         this.questRepository = questRepository;
+        this.questRoomRepository = questRoomRepository;
     }
 
     public Quest getQuestById(Long id) {
@@ -26,7 +29,7 @@ public class QuestService {
         return questRepository.findAll();
     }
 
-    public void save(Quest quest) {
-        questRepository.save(quest);
+    public Quest save(Quest quest) {
+        return questRepository.save(quest);
     }
 }
